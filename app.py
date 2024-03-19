@@ -12,8 +12,7 @@ from langchain_community.vectorstores.utils import filter_complex_metadata
 from tempfile import NamedTemporaryFile
 
 
-def get_data_chunks(documents):
-    bytes_data = files.read()
+def get_data_chunks(bytes_data):
     with NamedTemporaryFile(delete=False) as tmp:  
         tmp.write(bytes_data)                      
         docs = PyPDFLoader(tmp.name).load()       
@@ -48,11 +47,12 @@ def get_answer(retriever,question):
     return answer
 
 files=st.file_uploader('Upload your documents here (PDFs only)')
+bytes_data = files.read()
 text_inp=st.text_input('What do you want to know about your document(s)?')
 
 if st.button('Generate'):
     with st.spinner('Processing Information'):
-        data=get_data_chunks(files)
+        data=get_data_chunks(bytes_data)
         retriever=get_embeddings_and_retrieve(data)
         answer=get_answer(retriever, text_inp)
     st.write(answer['result'])
