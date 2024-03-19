@@ -7,3 +7,4 @@ ollama
 sentence-transformers
 langchain
 pypdf
+chromadb
