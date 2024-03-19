@@ -6,3 +6,4 @@ transformers
 ollama
 sentence-transformers
 langchain
+pypdf
