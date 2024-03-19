@@ -8,6 +8,7 @@ from langchain.prompts import PromptTemplate
 from langchain_community.llms import Ollama
 from langchain_community.document_loaders import PyPDFLoader
 import os
+from langchain_community.vectorstores.utils import filter_complex_metadata
 from tempfile import NamedTemporaryFile
 
 
