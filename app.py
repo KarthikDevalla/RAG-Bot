@@ -1,5 +1,3 @@
-# Intially read the documents. 
-from PyPDF2 import PdfReader
 import streamlit as st
 st.title('RAG-Bot')
 from langchain.text_splitter import RecursiveCharacterTextSplitter
