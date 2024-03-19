@@ -44,7 +44,7 @@ text_inp=st.text_input('What do you want to know about your document(s)?')
 
 if st.button('Generate'):
     with st.spinner('Processing Information'):
-        data=get_data_chunks('Apps_of_DS_Assignment_4.pdf')
+        data=get_data_chunks(files)
         retriever=get_embeddings_and_retrieve(data)
         answer=get_answer(retriever, text_inp)
     st.write(answer['result'])
