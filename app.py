@@ -9,14 +9,16 @@ from langchain_community.llms import Ollama
 from langchain_community.document_loaders import PyPDFLoader
 import os
 from langchain_community.vectorstores.utils import filter_complex_metadata
-from tempfile import NamedTemporaryFile
 
 
-def get_data_chunks(bytes_data):
-    with NamedTemporaryFile(delete=False) as tmp:  
-        tmp.write(bytes_data)                      
-        docs = PyPDFLoader(tmp.name).load()       
-    os.remove(tmp.name)   
+def get_data_chunks(file):
+    temp_file = "./temp.pdf"
+    with open(temp_file, "wb") as file:
+       file.write(uploaded_file.getvalue())
+       file_name = uploaded_file.name
+
+    loader = PyPDFLoader(temp_file)
+    documents = loader.load_and_split()    
     splitter=RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     data=splitter.split_documents(docs)
     chunks = filter_complex_metadata(data)
@@ -46,13 +48,12 @@ def get_answer(retriever,question):
     answer=chain.invoke({'query':question})
     return answer
 
-files=st.file_uploader('Upload your documents here (PDFs only)')
-bytes_data = files.read()
+file=st.file_uploader('Upload your documents here (PDFs only)')
 text_inp=st.text_input('What do you want to know about your document(s)?')
 
 if st.button('Generate'):
     with st.spinner('Processing Information'):
-        data=get_data_chunks(bytes_data)
+        data=get_data_chunks(file)
         retriever=get_embeddings_and_retrieve(data)
         answer=get_answer(retriever, text_inp)
     st.write(answer['result'])
