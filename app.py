@@ -1,16 +1,11 @@
 # Intially read the documents. 
 from PyPDF2 import PdfReader
 import streamlit as st
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
-from transformers import AutoTokenizer, AutoModelForQuestionAnswering, pipeline
 from langchain.prompts import PromptTemplate
-from langchain_community.llms.huggingface_pipeline import HuggingFacePipeline
 from langchain_community.llms import Ollama
 from langchain_community.document_loaders import PyPDFLoader
-from langchain.vectorstores.utils import filter_complex_metadata
 
 st.title('RAG-Bot')
 st.set_page_config(page_title="RAG")
