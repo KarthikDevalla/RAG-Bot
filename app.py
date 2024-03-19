@@ -14,8 +14,8 @@ from langchain_community.vectorstores.utils import filter_complex_metadata
 def get_data_chunks(file):
     temp_file = "./temp.pdf"
     with open(temp_file, "wb") as file:
-       file.write(uploaded_file.getvalue())
-       file_name = uploaded_file.name
+       file.write(file.getvalue())
+       file_name = file.name
 
     loader = PyPDFLoader(temp_file)
     documents = loader.load_and_split()    
