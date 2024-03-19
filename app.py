@@ -7,11 +7,16 @@ from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain_community.llms import Ollama
 from langchain_community.document_loaders import PyPDFLoader
-
+import os
+from tempfile import NamedTemporaryFile
 
 
 def get_data_chunks(documents):
-    docs = PyPDFLoader(file_path=documents).load()
+    bytes_data = files.read()
+    with NamedTemporaryFile(delete=False) as tmp:  
+        tmp.write(bytes_data)                      
+        docs = PyPDFLoader(tmp.name).load()       
+    os.remove(tmp.name)   
     splitter=RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     data=splitter.split_documents(docs)
     chunks = filter_complex_metadata(data)
