@@ -18,7 +18,7 @@ def get_data_chunks(file):
        file_name = f.name
 
     loader = PyPDFLoader(temp_file)
-    documents = loader.load_and_split()    
+    docs = loader.load_and_split()    
     splitter=RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     data=splitter.split_documents(docs)
     chunks = filter_complex_metadata(data)
