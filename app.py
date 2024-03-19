@@ -2,7 +2,6 @@
 from PyPDF2 import PdfReader
 import streamlit as st
 st.title('RAG-Bot')
-st.set_page_config(page_title="RAG")
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
