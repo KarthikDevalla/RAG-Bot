@@ -1,14 +1,15 @@
 # Intially read the documents. 
 from PyPDF2 import PdfReader
 import streamlit as st
+st.title('RAG-Bot')
+st.set_page_config(page_title="RAG")
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain_community.llms import Ollama
 from langchain_community.document_loaders import PyPDFLoader
 
-st.title('RAG-Bot')
-st.set_page_config(page_title="RAG")
+
 
 def get_data_chunks(documents):
     docs = PyPDFLoader(file_path=documents).load()
