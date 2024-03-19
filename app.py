@@ -1,5 +1,7 @@
 import streamlit as st
 st.title('RAG-Bot')
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.vectorstores import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
@@ -39,7 +41,7 @@ def get_answer(retriever,question):
     answer=chain.invoke({'query':question})
     return answer
 
-files=st.file_uploader('Upload your documents here (PDFs only)',accept_multiple_files=True)
+files=st.file_uploader('Upload your documents here (PDFs only)')
 text_inp=st.text_input('What do you want to know about your document(s)?')
 
 if st.button('Generate'):
