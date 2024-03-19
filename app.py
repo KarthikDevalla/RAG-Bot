@@ -1,7 +1,7 @@
 import streamlit as st
 st.title('RAG-Bot')
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
@@ -27,7 +27,7 @@ def get_data_chunks(file):
 # Create embeddings and store them in the FIASS database
 def get_embeddings_and_retrieve(data):
     embeddings=HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-l6-v2',model_kwargs={'device':'cpu'})
-    vector_db=Chroma.from_documents(data, embeddings)
+    vector_db=FAISS.from_documents(data, embeddings)
     retriever=vector_db.as_retriever(search_kwargs={'k':5})
     return retriever
 
