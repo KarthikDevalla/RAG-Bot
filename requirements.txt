@@ -6,3 +6,4 @@ faiss-cpu
 transformers
 ollama
 sentence-transformers
+langchain
