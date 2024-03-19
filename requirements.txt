@@ -7,4 +7,5 @@ ollama
 sentence-transformers
 langchain
 pypdf
-chromadb
+chromadb==0.4.17
+pysqlite3-binary
